@@ -1,35 +1,37 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react';
+import Bienvenida from './pages/Home';
+//import Formularios from './pages/Formularios';
+import Resumen from './pages/Resumen';
+import './styles/forms.css'; // Importa los estilos
 
-function App() {
-  const [count, setCount] = useState(0)
+const App: React.FC = () => {
+  // Estado para controlar la página actual
+  const [paginaActual, setPaginaActual] = useState('bienvenida');
+  // Estado para almacenar los datos de todos los formularios
+  const [formData, setFormData] = useState<{ [key: string]: any }>({});
+
+  // Renderiza la página según el estado
+  const renderPagina = () => {
+    switch (paginaActual) {
+      case 'bienvenida':
+        return <Bienvenida onStart={() => setPaginaActual('formularios')} />;
+     /* case 'formularios':
+        return <Formularios onComplete={(data) => {
+          setFormData(prev => ({ ...prev, ...data }));
+          setPaginaActual('resumen');
+        }} formData={formData} />; */
+      case 'resumen':
+        return <Resumen formData={formData} onBack={() => setPaginaActual('bienvenida')} />;
+      default:
+        return <Bienvenida onStart={() => setPaginaActual('formularios')} />;
+    }
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div className="app">
+      {renderPagina()}
+    </div>
+  );
+};
 
-export default App
+export default App;

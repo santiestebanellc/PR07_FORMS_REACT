@@ -1,0 +1,40 @@
+{
+    "formularios": [
+      {
+        "id": "personal",
+        "titulo": "Información Personal",
+        "campos": [
+          {
+            "id": "name",
+            "tipo": "text",
+            "pregunta": "¿Cuál es tu nombre?",
+            "restricciones": {
+              "min": 3,
+              "max": 50
+            }
+          },
+          {
+            "id": "age",
+            "tipo": "text",
+            "pregunta": "¿Cuál es tu edad?",
+            "restricciones": {
+              "min": 1,
+              "max": 120
+            },
+            "validacion": {
+              "min_edad": 0
+            }
+          },
+          {
+            "id": "email",
+            "tipo": "text",
+            "pregunta": "¿Cuál es tu correo electrónico?",
+            "validacion": {
+              "formato": "email",
+              "dominio": "stucom.com"
+            }
+          }
+        ]
+      }
+    ]
+  }
