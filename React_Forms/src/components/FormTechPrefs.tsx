@@ -1,7 +1,6 @@
-/*Formulario de preferencias en tecnología*/
-
+/* Formulario de información personal */
 import React, { useState, useEffect } from 'react';
-import '../styles/forms.css';
+import '../../styles/forms.css';
 
 interface Campo {
   id: string;
@@ -34,7 +33,7 @@ const FormPersonal: React.FC = () => {
 
   // Cargar el JSON
   useEffect(() => {
-    fetch('React_Forms\public\cuestionario.json')
+    fetch('/cuestionario.json')
       .then(response => response.json())
       .then(data => setCuestionario(data.formularios))
       .catch(error => console.error('Error cargando el cuestionario:', error));
@@ -48,7 +47,7 @@ const FormPersonal: React.FC = () => {
 
   // Validar un campo
   const validateField = (id: string, value: string | string[]): string => {
-    const campo = cuestionario[0]?.campos.find(c => c.id === id);
+    const campo = cuestionario.find(f => f.id === 'personal')?.campos.find(c => c.id === id);
     if (!campo) return '';
 
     let error = '';
@@ -77,15 +76,18 @@ const FormPersonal: React.FC = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     let newErrors: { [key: string]: string } = {};
-    cuestionario[0]?.campos.forEach(campo => {
-      const value = formData[campo.id];
-      const error = validateField(campo.id, value as string);
-      if (error) newErrors[campo.id] = error;
-    });
+    const personalForm = cuestionario.find(f => f.id === 'personal');
+    if (personalForm) {
+      personalForm.campos.forEach(campo => {
+        const value = formData[campo.id];
+        const error = validateField(campo.id, value as string);
+        if (error) newErrors[campo.id] = error;
+      });
+    }
 
     if (Object.keys(newErrors).length === 0) {
       console.log('Datos del formulario:', formData);
-      const jsonData = JSON.stringify({ [cuestionario[0].id]: formData }, null, 2);
+      const jsonData = JSON.stringify({ personal: formData }, null, 2);
       console.log('JSON generado:', jsonData);
       alert('Formulario enviado con éxito y guardado en JSON!');
     } else {
@@ -117,11 +119,13 @@ const FormPersonal: React.FC = () => {
 
   if (cuestionario.length === 0) return <div>Cargando...</div>;
 
+  const personalForm = cuestionario.find(f => f.id === 'personal');
+
   return (
     <div className="form-container">
-      <h2>{cuestionario[0].titulo}</h2>
+      <h2>{personalForm?.titulo || 'Información Personal'}</h2>
       <form onSubmit={handleSubmit}>
-        {cuestionario[0].campos.map(campo => renderCampo(campo))}
+        {personalForm?.campos.map(campo => renderCampo(campo))}
         <button type="submit">Enviar</button>
       </form>
     </div>

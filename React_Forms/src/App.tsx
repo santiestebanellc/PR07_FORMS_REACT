@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Bienvenida from './pages/Home';
-//import Formularios from './pages/Formularios';
+import Formularios from './pages/Formularios';
 import Resumen from './pages/Resumen';
 import './styles/forms.css'; // Importa los estilos
 
@@ -15,11 +15,11 @@ const App: React.FC = () => {
     switch (paginaActual) {
       case 'bienvenida':
         return <Bienvenida onStart={() => setPaginaActual('formularios')} />;
-     /* case 'formularios':
+      case 'formularios':
         return <Formularios onComplete={(data) => {
           setFormData(prev => ({ ...prev, ...data }));
           setPaginaActual('resumen');
-        }} formData={formData} />; */
+        }} formData={formData} />;
       case 'resumen':
         return <Resumen formData={formData} onBack={() => setPaginaActual('bienvenida')} />;
       default:

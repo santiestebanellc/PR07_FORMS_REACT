@@ -1,7 +1,7 @@
 /*Página para el formulario de información personal*/
 
 import React from 'react';
-import FormPersonal from '../components/FormPersonal';
+import FormPersonal from '../components/FormTechPrefs';
 import '../styles/forms.css';
 
 const PersonalForm: React.FC = () => {

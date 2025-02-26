@@ -1,40 +1,34 @@
 {
-    "formularios": [
-      {
-        "id": "personal",
-        "titulo": "Información Personal",
-        "campos": [
-          {
-            "id": "name",
-            "tipo": "text",
-            "pregunta": "¿Cuál es tu nombre?",
-            "restricciones": {
-              "min": 3,
-              "max": 50
-            }
-          },
-          {
-            "id": "age",
-            "tipo": "text",
-            "pregunta": "¿Cuál es tu edad?",
-            "restricciones": {
-              "min": 1,
-              "max": 120
-            },
-            "validacion": {
-              "min_edad": 0
-            }
-          },
-          {
-            "id": "email",
-            "tipo": "text",
-            "pregunta": "¿Cuál es tu correo electrónico?",
-            "validacion": {
-              "formato": "email",
-              "dominio": "stucom.com"
-            }
-          }
-        ]
-      }
-    ]
-  }
+  "formularios": [
+    {
+      "id": "personal",
+      "titulo": "Información Personal",
+      "campos": [
+        { "id": "name", "tipo": "text", "pregunta": "¿Cuál es tu nombre?", "restricciones": { "min": 3, "max": 50 } },
+        { "id": "age", "tipo": "text", "pregunta": "¿Cuál es tu edad?", "restricciones": { "min": 1, "max": 120 }, "validacion": { "min_edad": 0 } },
+        { "id": "email", "tipo": "text", "pregunta": "¿Cuál es tu correo electrónico?", "validacion": { "formato": "email", "dominio": "stucom.com" } }
+      ]
+    },
+    {
+      "id": "academic",
+      "titulo": "Evaluación Académica",
+      "campos": [
+        { "id": "nivel_educativo", "tipo": "text", "pregunta": "¿Cuál es tu nivel educativo?", "restricciones": { "min": 3, "max": 50 } }
+      ]
+    },
+    {
+      "id": "tech",
+      "titulo": "Preferencias en Tecnología",
+      "campos": [
+        { "id": "dispositivos", "tipo": "check", "pregunta": "¿Qué dispositivos usas regularmente?", "opciones": ["smartphone", "laptop", "tablet", "smartwatch"], "validacion": { "max_seleccionados": 2 } }
+      ]
+    },
+    {
+      "id": "movie",
+      "titulo": "Preferencias en Cine",
+      "campos": [
+        { "id": "genero_favorito", "tipo": "select", "pregunta": "¿Cuál es tu género favorito?", "opciones": ["Acción", "Comedia", "Drama", "Ciencia Ficción"] }
+      ]
+    }
+  ]
+}
